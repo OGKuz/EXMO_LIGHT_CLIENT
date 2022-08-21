@@ -100,7 +100,10 @@ class MyWindow(QtWidgets.QMainWindow):
             df = df.to_dict()
             for _ in df.keys():
                 if _ not in ['USD','USDT']:
-                    df[_] = df[_] * float(self.driver.required_amount(_,'USDT',1)['amount'])
+                    try:
+                        df[_] = df[_] * float(self.driver.required_amount(_,'USDT',1)['amount'])
+                    except KeyError:
+                        df[_] = df[_] * float(self.driver.required_amount(_,'USD',1)['amount'])
             df = pd.Series(df)
             df = df[df > 1]
             plt.figure(figsize=(300/96, 300/96), dpi=96)
