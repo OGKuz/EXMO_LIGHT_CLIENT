@@ -1,12 +1,9 @@
-import ssl
 import time
-import json
-import urllib
 import hmac, hashlib
 from urllib import response
 import requests
 from urllib.parse import urlparse, urlencode
-from urllib.request import Request, urlopen
+
 
 
 class Exmo():
@@ -204,7 +201,9 @@ class Exmo():
         return response.json()
 
     def user_info (self) -> dict:
-
+        '''
+        Возвращает информацию об аккаунте
+        '''
         url = 'https://api.exmo.com/v1.1/user_info'
 
         payload = dict()
